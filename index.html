@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>厦门洪莲中二路地块 · 互动三维沙盘</title><meta name="description" content="厦门思明洪莲中二路地块三维沙盘。单指拖动旋转，双指缩放，点选楼栋可从指定楼层查看邻楼遮挡。"><meta name="robots" content="noindex"><meta property="og:title" content="厦门洪莲中二路地块 · 互动三维沙盘"><meta property="og:description" content="厦门思明洪莲中二路地块三维沙盘。单指拖动旋转，双指缩放，点选楼栋可从指定楼层查看邻楼遮挡。"><meta property="og:image" content="https://gilka1456-rgb.github.io/honglian-xiamen-sandtable/preview.jpg"><meta property="og:url" content="https://gilka1456-rgb.github.io/honglian-xiamen-sandtable/"><link rel="stylesheet" href="./viewer.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>洪莲中二路地块 · 互动三维沙盘</title><meta name="description" content="厦门思明洪莲中二路地块互动沙盘。用手指旋转、缩放，选楼栋和楼层，从窗外查看两栋邻楼的遮挡。"><meta name="robots" content="noindex"><meta property="og:title" content="洪莲中二路地块 · 互动三维沙盘"><meta property="og:description" content="厦门思明洪莲中二路地块互动沙盘。用手指旋转、缩放，选楼栋和楼层，从窗外查看两栋邻楼的遮挡。"><meta property="og:image" content="https://gilka1456-rgb.github.io/honglian-xiamen-sandtable/preview.jpg?v=bd34f396c3"><meta property="og:url" content="https://gilka1456-rgb.github.io/honglian-xiamen-sandtable/"><link rel="stylesheet" href="./viewer.css?v=d31fffacfa"></head>
 <body>
 <svg aria-hidden="true" class="defs" xmlns="http://www.w3.org/2000/svg">
 <symbol id="i-mark" viewBox="0 0 32 32"><path d="m3 12 13-7 13 7-13 7zM3 17l13 7 13-7M3 22l13 7 13-7"/></symbol>
@@ -19,38 +19,68 @@
 <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 5h13M8 12h13M8 19h13M3 5h1M3 12h1M3 19h1"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"/></symbol>
 </svg>
-<header class="mast"><div class="brand"><span class="brandmark"><svg><use href="#i-mark"/></svg></span><h1>地块三维沙盘</h1></div><div class="loc"><svg><use href="#i-pin"/></svg>厦门思明<span>/</span>洪莲中二路</div><div class="top-actions"><button id="sources" aria-label="查看建模依据" title="建模依据"><svg><use href="#i-plan"/></svg><span>建模依据</span></button><button id="fullscreen" title="全屏" aria-label="切换全屏"><svg><use href="#i-max"/></svg></button></div></header>
+<header class="mast">
+  <div class="brand"><span class="brandmark" aria-hidden="true"><svg><use href="#i-mark"/></svg></span><h1>洪莲中二路沙盘</h1></div>
+  <div class="loc"><svg><use href="#i-pin"/></svg>厦门市思明区</div>
+  <div class="top-actions"><button id="sources"><svg><use href="#i-plan"/></svg><span>建模依据</span></button><button id="fullscreen" title="全屏" aria-label="切换全屏"><svg><use href="#i-max"/></svg></button></div>
+</header>
 <main>
-<section id="view" aria-label="可交互的三维建筑模型">
-<canvas id="canvas" tabindex="0" aria-label="地块三维沙盘，拖动旋转，滚轮缩放。通过楼栋列表与视角按钮也可查看。"></canvas><div id="pins"></div>
-<nav class="view-modes" aria-label="相机视角"><button data-view="orbit" class="active"><svg><use href="#i-iso"/></svg>鸟瞰</button><button data-view="plan"><svg><use href="#i-top"/></svg>总平</button><button data-view="window"><svg><use href="#i-eye"/></svg>窗外</button></nav>
-<div class="compass" title="依据图纸和卫星图估算的正北方向"><b>N</b><svg viewBox="0 0 38 38"><g id="needle"><path d="m19 5 5 15-5-2z" fill="#274e47"/><path d="m19 5-5 15 5-2z" fill="#5c7770"/><path d="m19 32-5-12 5-2 5 2z" fill="#b3c0ba"/></g></svg></div>
-<div id="windowCross" hidden aria-hidden="true"></div><button id="reaim" hidden><svg><use href="#i-eye"/></svg>对准所选邻楼</button>
-<div class="navtools"><button id="zplus" title="放大" aria-label="放大"><svg><use href="#i-plus"/></svg></button><button id="zminus" title="缩小" aria-label="缩小"><svg><use href="#i-minus"/></svg></button><button id="resetCam" title="恢复初始鸟瞰" aria-label="恢复初始鸟瞰"><svg><use href="#i-rotate"/></svg></button></div>
-<div class="view-footer"><div class="legend"><span><i class="dot sea"></i>规划楼栋</span><span><i class="dot clay"></i>红圈邻楼</span></div><small id="gesture">拖动旋转　·　滚轮缩放　·　右键平移</small></div>
-<span class="touch-help" id="touchHelp">单指旋转　双指缩放</span><div id="loading">正在构建三维沙盘…</div></section>
-<aside id="panel">
-<nav class="tabs" aria-label="查看内容"><button class="active" data-tab="overview">楼栋总览</button><button data-tab="analysis">楼层视线</button></nav>
-<div class="scroll-panel" id="scrollPanel">
-<section id="overview"><div class="section-head"><h2>地块建筑</h2><span>规划 9 栋</span></div>
-<p class="intro">点选住宅，查看楼层与邻楼的遮挡关系。</p>
-<div class="listhead"><span>住宅楼</span><span>地上层数 / 建筑高度</span></div><div id="buildingList"></div>
-<div class="support-line"><span>配套建筑</span><strong>7#、8#、9#</strong></div>
-<div class="divider"></div><div class="section-head"><h2>红圈邻楼</h2><span class="assumption">高度可调</span></div>
-<div id="neighborList"></div><p id="neighborNote" class="footnote">位置取自图 3。高度为情景值，可按实测修改。</p>
-<button class="large secondary" id="neighborView"><svg><use href="#i-rotate"/></svg>从邻楼一侧查看</button>
-<div class="divider"></div><label class="toggleline">显示楼号与邻楼标记<input id="showLabels" type="checkbox" checked></label>
-<label class="toggleline">显示用地红线<input id="showBoundary" type="checkbox" checked></label>
-</section>
-<section id="analysis" hidden><div class="section-head"><h2>楼层观察点</h2><select id="buildingSelect" aria-label="选择观察楼栋"></select></div>
-<div class="floor-row"><div><strong id="floorNum">6</strong><span>层</span></div><small id="floorData"></small></div><input type="range" id="floor" min="1" value="6" step="1" aria-label="观察楼层">
-<div class="control-line"><label for="point">外墙取点</label><select id="point"><option value="0.24">左段</option><option value="0.5" selected>中段</option><option value="0.76">右段</option></select></div>
-<div class="field-title">朝向红圈邻楼</div><div class="target-grid"><button data-target="A"><b>A</b>大红圈</button><button data-target="B"><b>B</b>小红圈</button></div>
-<div class="control-line" id="partRow"><label for="aimPart">石村公交基地</label><select id="aimPart"><option value="tower">18 层塔楼方向</option><option value="podium">4 层裙房方向</option></select></div>
-<div class="result" id="result" aria-live="polite"><div class="result-kicker">所选方向的水平视线</div><strong id="verdict"></strong><div id="profile"></div><p id="resultDetail"></p></div>
-<button id="enterWindow" class="large primary"><svg><use href="#i-eye"/></svg><span>从这一层向外看</span></button>
-<details id="heights" class="drawer"><summary><svg><use href="#i-tune"/></svg>邻楼高度设定</summary><p class="footnote" id="heightNote">两栋邻楼的高度均可修改，视线随之更新。</p><div id="heightInputs"></div><button class="reset-small" id="restoreH">恢复初始高度</button></details>
-<details id="solar" class="drawer"><summary><svg><use href="#i-sun"/></svg>查看此点的日照</summary><div class="date-row"><label for="sunDate">日期</label><input id="sunDate" type="date" value="2026-12-22"></div><div class="control-line"><label for="sunTime">北京时间</label><output id="sunClock">14:00</output></div><input id="sunTime" type="range" min="360" max="1080" step="10" value="840" aria-label="太阳时间"><p class="sun-state" id="sunResult"></p><p class="footnote">仅计算该时刻外墙观察点与已建模楼体之间的直射光。</p></details></section></div></aside></main>
+  <section id="view" aria-label="可交互的三维建筑模型">
+    <div id="modelSurface"><canvas id="canvas" tabindex="0" aria-label="三维沙盘，拖动旋转，双指或滚轮缩放。也可通过下方的楼栋和视角按钮浏览。"></canvas>
+    <div id="pins"></div></div>
+    <nav class="view-modes" aria-label="观察视角">
+      <button data-view="orbit" class="active"><svg><use href="#i-iso"/></svg>鸟瞰</button>
+      <button data-view="plan"><svg><use href="#i-top"/></svg>总平</button>
+      <button data-view="window"><svg><use href="#i-eye"/></svg>窗外</button>
+    </nav>
+    <div class="compass" aria-label="估算北向"><b>N</b><svg viewBox="0 0 38 38"><g id="needle"><path d="m19 5 5 15-5-2z" fill="#264f47"/><path d="m19 5-5 15 5-2z" fill="#61897b"/><path d="m19 32-5-12 5-2 5 2z" fill="#abb9af"/></g></svg></div>
+    <div id="windowCross" hidden aria-hidden="true"></div>
+    <div class="window-tools" hidden><span id="windowStatus"></span><button id="reaim" hidden><svg><use href="#i-eye"/></svg>对准邻楼</button></div>
+    <div class="navtools" aria-label="视图工具"><button id="zplus" title="放大" aria-label="放大"><svg><use href="#i-plus"/></svg></button><button id="zminus" title="缩小" aria-label="缩小"><svg><use href="#i-minus"/></svg></button><button id="resetCam" title="恢复初始鸟瞰" aria-label="恢复初始鸟瞰"><svg><use href="#i-rotate"/></svg></button></div>
+    <div class="view-footer"><small id="gesture">拖动旋转　·　滚轮缩放</small></div>
+    <div id="loading">正在构建三维沙盘…</div>
+  </section>
+  <aside id="panel" aria-label="楼栋与楼层设置">
+    <div class="panel-bar">
+      <nav class="tabs" aria-label="沙盘工具"><button class="active" data-tab="overview">选楼栋</button><button data-tab="analysis">看楼层视线</button></nav>
+      <button id="sheetToggle" aria-controls="scrollPanel" aria-expanded="true" aria-label="收起面板" title="收起面板"><span>收起</span><svg><use href="#i-next"/></svg></button>
+    </div>
+    <div class="scroll-panel" id="scrollPanel">
+      <section id="overview">
+        <div class="section-head housing-head"><h2>住宅楼栋</h2><button id="jumpNeighbors">查看两栋邻楼<svg><use href="#i-next"/></svg></button></div>
+        <div id="buildingList"></div>
+        <div class="support-line"><span>配套建筑</span><strong>7#、8#、9#</strong></div>
+        <div class="divider"></div><div class="section-head" id="neighborHeading"><h2>红圈邻楼</h2></div>
+        <div id="neighborList"></div><p id="neighborNote" class="footnote">邻楼位置来自卫星图，高度可按实测调整。</p>
+        <button class="large secondary" id="neighborView"><svg><use href="#i-rotate"/></svg>从邻楼一侧看沙盘</button>
+        <details class="drawer display-options"><summary><svg><use href="#i-tune"/></svg>沙盘标记</summary>
+          <label class="toggleline">楼号和邻楼位置<input id="showLabels" type="checkbox" checked></label>
+          <label class="toggleline">用地红线<input id="showBoundary" type="checkbox" checked></label>
+        </details>
+      </section>
+      <section id="analysis" hidden>
+        <div class="section-head"><h2><label for="buildingSelect">观察楼栋</label></h2><select id="buildingSelect" aria-label="选择观察楼栋"></select></div>
+        <div class="floor-box"><div class="floor-row"><div><strong id="floorNum">6</strong><span>层</span></div><small id="floorData"></small></div>
+          <div class="floor-stepper"><button id="floorDown" aria-label="降低一层"><svg><use href="#i-minus"/></svg></button><input type="range" id="floor" min="1" value="6" step="1" aria-label="观察楼层"><button id="floorUp" aria-label="升高一层"><svg><use href="#i-plus"/></svg></button></div>
+        </div>
+        <div id="sightSummary" class="sight-summary" aria-live="polite" aria-atomic="true"><span id="sightTarget"></span><strong id="verdict"></strong></div>
+        <div class="control-line"><label for="point">外墙观察点</label><select id="point"><option value="0.24">左段</option><option value="0.5" selected>中段</option><option value="0.76">右段</option></select></div>
+        <div class="field-title">朝哪栋邻楼看</div>
+        <div class="target-grid"><button data-target="A"><b>A</b>大红圈</button><button data-target="B"><b>B</b>小红圈</button></div>
+        <div class="control-line" id="partRow"><label for="aimPart">公交基地</label><select id="aimPart"><option value="tower">18 层塔楼方向</option><option value="podium">4 层裙房方向</option></select></div>
+        <div class="result" id="result"><div class="result-kicker">视线剖面</div><div id="profile"></div><p id="resultDetail"></p></div>
+        <button id="enterWindow" class="large primary"><svg><use href="#i-eye"/></svg><span>从这一层向外看</span></button>
+        <details id="heights" class="drawer"><summary><svg><use href="#i-tune"/></svg>调整邻楼高度</summary><p class="footnote" id="heightNote">调整后会重新计算视线。</p><div id="heightInputs"></div><button class="reset-small" id="restoreH">恢复初始高度</button></details>
+        <details id="solar" class="drawer"><summary><svg><use href="#i-sun"/></svg>查看日照</summary><div class="date-row"><label for="sunDate">日期</label><input id="sunDate" type="date" value="2026-12-22"></div><div class="control-line"><label for="sunTime">北京时间</label><output id="sunClock">14:00</output></div><input id="sunTime" type="range" min="360" max="1080" step="10" value="840" aria-label="太阳时间"><p class="sun-state" id="sunResult"></p><p class="footnote">按所选时刻、外墙观察点和已建模楼体估算直射光。</p></details>
+      </section>
+    </div>
+  </aside>
+</main>
 <dialog id="dialog"><div class="dialoghead"><h2>建模依据</h2><button id="close" aria-label="关闭"><svg><use href="#i-close"/></svg></button></div><div id="refContent"></div></dialog>
-<script src="./viewer.js" defer></script>
+<script src="./viewer.js?v=53f77ae460" defer></script>
 </body></html>
+
+
+
+
+
